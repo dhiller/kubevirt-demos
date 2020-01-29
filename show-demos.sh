@@ -8,6 +8,13 @@ fi
 
 set -euo pipefail
 
+if [ "$#" -gt 0 ]; then
+    x="$1"
+    start_at=$((x-1))
+else
+    start_at=0
+fi
+
 cat <<EOF
 Following keyboard shortcuts are available:
 
@@ -31,6 +38,10 @@ trap stop_it SIGINT SIGTERM
 
 while true; do
     for demo_file in $(ls *-ascii.cast); do
+        if [ "$start_at" -gt 0 ]; then
+            start_at=$(($start_at-1))
+            continue
+        fi
         echo "Next demo: $demo_file..."
         echo
         sleep 1
