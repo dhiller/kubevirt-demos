@@ -47,7 +47,7 @@ while true; do
             continue
         fi
         demo_name=$(echo $demo_file | sed -E 's/[0-9]+-kv-(.*)-ascii.cast/\1/')
-        if [ $figlet_available ]; then
+        if [ $figlet_available -ne 0 ]; then
             width=$(tput cols)
             figlet -w "$width" "$demo_name"
             echo
